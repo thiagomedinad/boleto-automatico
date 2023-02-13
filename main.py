@@ -4,8 +4,8 @@ from selenium.webdriver.chrome.service import Service
 import time
 
 page = 'https://www.cesar.school/'
-email = 'tmd@cesar.school'
-password = '#Thelordoftherings2014'
+email = 'seu_email'
+password = 'sua_senha'
 
 service = Service(ChromeDriverManager().install())
 
