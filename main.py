@@ -34,6 +34,7 @@ FILE_TYPE = r'/*.pdf'
 def send_email(destination):
     files = glob.glob(FOLDER_PATH + FILE_TYPE)
     max_file = max(files, key=os.path.getctime)   
+    os.rename(max_file, 'SeuBoleto.pdf')
 
     subject = 'O seu boleto desse mês está aqui. Não ia esquecer, né? ;)'
     em = EmailMessage()
@@ -41,7 +42,7 @@ def send_email(destination):
     em['To'] = destination
     em['Subject'] = subject
 
-    with open(max_file, 'rb') as f:
+    with open('SeuBoleto.pdf', 'rb') as f:
         file_data = f.read()
         file_name = f.name
         em.add_attachment(file_data, maintype='application', subtype='octet-stream', filename=file_name)
@@ -62,20 +63,20 @@ def download_boleto(school):
         time.sleep(3)
         nav.find_element('xpath', '//*[@id="onetrust-reject-all-handler"]').click()
         nav.find_element('xpath', '//*[@id="masthead"]/div[1]/div/div/div/div/div[1]/div/div/span/a[3]/span').click()
-        time.sleep(2)
+        time.sleep(1)
         nav.find_element('xpath', '//*[@id="identifierId"]').send_keys(EMAIL)
         nav.find_element('xpath', '//*[@id="identifierNext"]/div/button/span').click()
         time.sleep(2)
         nav.find_element('xpath', '//*[@id="password"]/div[1]/div/div[1]/input').send_keys(PASSWORD)
         nav.find_element('xpath', '//*[@id="passwordNext"]/div/button/span').click()
-        time.sleep(8)
+        time.sleep(7)
         nav.maximize_window()
-        time.sleep(3)
+        time.sleep(2.7)
         nav.find_element('xpath', '//*[@id="ion-side-menu"]/menu-left/ion-content/div[1]/ion-list/div/div[4]/div/ion-item[8]/a[1]').click()
         nav.find_element('xpath', '//*[@id="ion-side-menu"]/menu-left/ion-content/div[1]/ion-list/div/div[4]/div/ion-item[8]/div[3]/a').click()
-        time.sleep(3.5)
+        time.sleep(2.7)
         nav.find_element('xpath', '//*[@id="ion-side-menu-content"]/ion-nav-view/ion-view/ion-content/div[1]/div/boleto-deck/div/div/div[2]/boleto-detail/div/div/div/a[1]/span').click()
-        time.sleep(6)
+        time.sleep(4.5)
         nav.close()
 
     elif (school == '2'):
