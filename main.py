@@ -3,6 +3,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from datetime import datetime
+import locale
 import smtplib
 import ssl
 from email.message import EmailMessage
@@ -15,6 +17,7 @@ import shutil
 
 
 EMAIL = 'tmd@cesar.school'
+CURRENT_MONTH = datetime.now().strftime('%B')
 EMAIL_SENDER = 'boletoautomaticoinsta@gmail.com'
 EMAIL_SENDER_PASSWORD = 'ziguqknssboygxir'
 PASSWORD = '#Thelordoftherings2014'
@@ -34,15 +37,18 @@ FILE_TYPE = r'/*.pdf'
 def send_email(destination):
     files = glob.glob(FOLDER_PATH + FILE_TYPE)
     max_file = max(files, key=os.path.getctime)   
-    os.rename(max_file, 'SeuBoleto.pdf')
 
+    ticket_name = 'SeuBoleto-{month}.pdf'.format(month = CURRENT_MONTH)
+
+    os.rename(max_file, f'SeuBoleto-{CURRENT_MONTH}.pdf')
+    
     subject = 'O seu boleto desse mês está aqui. Não ia esquecer, né? ;)'
     em = EmailMessage()
     em['From'] = EMAIL_SENDER
     em['To'] = destination
     em['Subject'] = subject
 
-    with open('SeuBoleto.pdf', 'rb') as f:
+    with open(ticket_name, 'rb') as f:
         file_data = f.read()
         file_name = f.name
         em.add_attachment(file_data, maintype='application', subtype='octet-stream', filename=file_name)
@@ -113,7 +119,7 @@ def download_boleto(school):
 
 
 def main(email, school):
-    
+
     download_boleto(school)
     send_email(email)
 
