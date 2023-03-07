@@ -109,15 +109,6 @@ def download_boleto(school):
         time.sleep(4)
         nav.close()
 
-    # elif (school == '3'):
-    #     PAGE = 'https://www.insper.edu.br/portaldoaluno/acesso/?redirect_to=aHR0cDovL3BvcnRhbGRvYWx1bm8uaW5zcGVyLmVkdS5ici9wb3J0YWxkb2FsdW5vLz8xZDhkN2Q3ZGZmNjNjYmU4YTlkZmQ5Y2Q4NzM1YzMzZg=='
-    #     nav.get(PAGE)
-    #     nav.maximize_window()
-    #     time.sleep(2)
-    #     nav.find_element('xpath', '//*[@id="recaptcha-anchor"]').click()
-
-
-
 def main(email, school):
 
     download_boleto(school)
