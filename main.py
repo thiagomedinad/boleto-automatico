@@ -24,15 +24,6 @@ PASSWORD = '#Thelordoftherings2014'
 FOLDER_PATH = r'/home/thiagomedinad/Downloads'
 FILE_TYPE = r'/*.pdf'
 
-# def move_file(month):
-#     DESTINY_DIR = rf'/home/thiagomedinad/Documents/boletos-CESARSCHOOL/{month}'
-#     files = glob.glob(FOLDER_PATH + FILE_TYPE)
-#     max_file = max(files, key=os.path.getctime)
-#     if (os.path.exists(DESTINY_DIR)):
-#         shutil.move(max_file, DESTINY_DIR)
-#     else: 
-#         os.mkdir(DESTINY_DIR)
-#         shutil.move(max_file, DESTINY_DIR)
 
 def send_email(destination):
     files = glob.glob(FOLDER_PATH + FILE_TYPE)
