@@ -53,9 +53,6 @@ def send_email(destination):
 
 
 def download_boleto(school):
-    option = Options()
-    
-    # option.add_argument('--headless')
     service = Service(ChromeDriverManager().install())
     nav = webdriver.Chrome(service=service)
 
@@ -103,14 +100,19 @@ def download_boleto(school):
         time.sleep(2.2)
         nav.find_element('xpath', '//*[@id="ion-side-menu-content"]/ion-nav-view/ion-view/ion-content/div[1]/div/boleto-deck/div/div/div[2]/boleto-detail/div/div/div/a[1]/span').click()
         time.sleep(4)
-        nav.close
+        nav.close()
 
+    # elif (school == '3'):
+    #     PAGE = 'https://www.insper.edu.br/portaldoaluno/acesso/?redirect_to=aHR0cDovL3BvcnRhbGRvYWx1bm8uaW5zcGVyLmVkdS5ici9wb3J0YWxkb2FsdW5vLz8xZDhkN2Q3ZGZmNjNjYmU4YTlkZmQ5Y2Q4NzM1YzMzZg=='
+    #     nav.get(PAGE)
+    #     nav.maximize_window()
+    #     time.sleep(2)
+    #     nav.find_element('xpath', '//*[@id="recaptcha-anchor"]').click()
 
 
 
 def main(email, school):
     
-    print(sys.argv[2])
     download_boleto(school)
     send_email(email)
 
