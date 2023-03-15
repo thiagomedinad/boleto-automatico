@@ -68,14 +68,20 @@ def download_boleto(school):
         nav.find_element('xpath', '//*[@id="passwordNext"]/div/button/span').click()
         time.sleep(7)
         nav.maximize_window()
-        time.sleep(2.7)
+        time.sleep(3)
         nav.find_element('xpath', '//*[@id="ion-side-menu"]/menu-left/ion-content/div[1]/ion-list/div/div[4]/div/ion-item[8]/a[1]').click()
         nav.find_element('xpath', '//*[@id="ion-side-menu"]/menu-left/ion-content/div[1]/ion-list/div/div[4]/div/ion-item[8]/div[3]/a').click()
-        time.sleep(2.7)
-        nav.find_element('xpath', '//*[@id="ion-side-menu-content"]/ion-nav-view/ion-view/ion-content/div[1]/div/boleto-deck/div/div/div[2]/boleto-detail/div/div/div/a[1]/span').click()
-        time.sleep(4.5)
-        nav.close()
-
+        time.sleep(3)
+        try:
+            nav.find_element('xpath', '//*[@id="ion-side-menu-content"]/ion-nav-view/ion-view/ion-content/div[1]/div/boleto-deck/div/div/div[2]/boleto-detail/div/div/div/a[1]/span').click()
+            time.sleep(5)
+            nav.close()
+            return 1
+        except:
+            print('O boleto já foi pago!\n')
+            nav.close()
+            return 0
+        
     elif (school == '2'):
         PAGE = 'https://www.fps.edu.br/area-estudante'
         nav.get(PAGE)
@@ -92,18 +98,25 @@ def download_boleto(school):
         time.sleep(1)
         nav.find_element('xpath', '//*[@id="password"]').send_keys(PASSWORD)
         nav.find_element('xpath', '//*[@id="button-login"]').click()
-        time.sleep(2.5)
+        time.sleep(3)
         nav.find_element('xpath', '//*[@id="ion-side-menu"]/menu-left/ion-content/div[1]/ion-list/div/div[4]/div/ion-item[7]/a[1]').click()
         nav.find_element('xpath', '//*[@id="ion-side-menu"]/menu-left/ion-content/div[1]/ion-list/div/div[4]/div/ion-item[7]/div[1]/a/span').click()
-        time.sleep(2.2)
-        nav.find_element('xpath', '//*[@id="ion-side-menu-content"]/ion-nav-view/ion-view/ion-content/div[1]/div/boleto-deck/div/div/div[2]/boleto-detail/div/div/div/a[1]/span').click()
-        time.sleep(4)
-        nav.close()
+        time.sleep(3)
+        try:
+            nav.find_element('xpath', '//*[@id="ion-side-menu-content"]/ion-nav-view/ion-view/ion-content/div[1]/div/boleto-deck/div/div/div[2]/boleto-detail/div/div/div/a[1]/span').click()
+            time.sleep(4)
+            nav.close()
+            return 1
+        except: 
+            print('O boleto já foi pago!\n')
+            nav.close()
+            return 0
 
 def main(email, school):
 
-    download_boleto(school)
-    send_email(email)
+    result = download_boleto(school)
+    if (result == 1):
+        send_email(email)
 
 
 if __name__ == "__main__":
