@@ -112,12 +112,44 @@ def download_boleto(school):
             nav.close()
             return 0
 
-def main(email, school):
+def wpp():
+    files = glob.glob(FOLDER_PATH + FILE_TYPE)
+    max_file = max(files, key=os.path.getctime)   
 
-    result = download_boleto(school)
-    if (result == 1):
-        send_email(email)
+    ticket_name = 'SeuBoleto-{month}.pdf'.format(month = CURRENT_MONTH)
 
+    os.rename(max_file, f'SeuBoleto-{CURRENT_MONTH}.pdf')
+    # import the necessary libraries
+    from twilio.rest import Client
+
+    # set up the Twilio client
+    account_sid = 'AC38c910d1744d45384e07eaf5b3930f03'
+    auth_token = '27e74dfe0253cac10fa88aea08c45d47'
+    client = Client(account_sid, auth_token)
+
+    # define the recipient's phone number and message body
+    recipient = 'whatsapp:+5581991702249'
+    body = 'Here is your PDF file!'
+
+    # create a message object
+    message = client.messages.create(
+        from_='whatsapp:+15075640491', # your Twilio WhatsApp phone number
+        body=body,
+        media_url=[max(files, key=os.path.getctime)], # URL to your PDF file
+        to=recipient
+    )
+
+    # print the message SID
+    print(message.sid)
+
+def main():
+
+    # result = download_boleto(school)
+    # # if (result == 1 and option == 1):
+    # #     send_email(email)
+    # # elif (result == 1 and option == 2):
+    # #     wpp()
+    wpp()
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2])
+    main()
