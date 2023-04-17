@@ -16,12 +16,12 @@ import sys
 import shutil
 
 
-EMAIL = 'tmd@cesar.school'
+EMAIL = 'your_email@gmail.com'
 CURRENT_MONTH = datetime.now().strftime('%B')
 EMAIL_SENDER = 'boletoautomaticoinsta@gmail.com'
 EMAIL_SENDER_PASSWORD = 'ziguqknssboygxir'
-PASSWORD = '#Thelordoftherings2014'
-FOLDER_PATH = r'/home/thiagomedinad/Downloads'
+PASSWORD = 'your_password'
+FOLDER_PATH = r'/home/your_user/Downloads'
 FILE_TYPE = r'/*.pdf'
 
 
