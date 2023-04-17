@@ -18,8 +18,8 @@ import shutil
 
 EMAIL = 'your_email@gmail.com'
 CURRENT_MONTH = datetime.now().strftime('%B')
-EMAIL_SENDER = 'boletoautomaticoinsta@gmail.com'
-EMAIL_SENDER_PASSWORD = 'ziguqknssboygxir'
+EMAIL_SENDER = 'email_sender_email@gmail.com'
+EMAIL_SENDER_PASSWORD = 'email_sender_password'
 PASSWORD = 'your_password'
 FOLDER_PATH = r'/home/your_user/Downloads'
 FILE_TYPE = r'/*.pdf'
